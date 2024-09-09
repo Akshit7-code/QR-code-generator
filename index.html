@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>QR code generator</h1>
+        <hr>
+        <p>Enter any text and URL to generates QR code</p>
+        <input type="text" name="text" id="text-input" placeholder="Enter text">
+        <div class="img-box">
+            <img src=" https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" id="qrimg" >
+        </div>
+        <button id="btn">Generates</button>
+    </div>
+    <script>
+        let text=document.getElementById('text-input');
+        let imgbox=document.querySelector('.img-box');
+        let qrimg=document.getElementById('qrimg');
+        let btn=document.getElementById('btn');
+        // function myfunc(){
+        //     if(text==""){
+        //         alert("Enter the text first");
+        //     }
+        //     else{
+        //         qrimg.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='+text.value;
+        //         imgbox.classList.add("show");
+        //     }
+        // }
+        btn.addEventListener("click",()=>{
+            if(text.value==""){
+                alert("Enter the text first");
+            }
+            else{
+                qrimg.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='+text.value;
+                imgbox.classList.add("show");
+            }
+        });
+    </script>
+</body>
+</html>
