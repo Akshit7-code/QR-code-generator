@@ -3,41 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>QR Code Generator</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <h1>QR code generator</h1>
-        <hr>
-        <p>Enter any text and URL to generates QR code</p>
-        <input type="text" name="text" id="text-input" placeholder="Enter text">
-        <div class="img-box">
-            <img src=" https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" id="qrimg" >
-        </div>
-        <button id="btn">Generates</button>
+<body class="light">
+    <div class="theme-switch">
+        <button id="theme-toggle" aria-label="Toggle theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
     </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h1>QR Code Generator</h1>
+                <p class="subtitle">Generate custom QR codes instantly</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="text-input" >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V4h16v3"/><path d="M4 11V4h16v7"/><path d="M4 15V4h16v11"/><path d="M4 19V4h16v15"/></svg>
+                    
+                    <h2 style="margin-top: 10px;">Enter Text</h2>
+                </label>
+                <input type="text" id="text-input" placeholder="Type or paste your text here">
+            </div>
+            
+            <div class="color-section">
+                <h2>Customize Colors</h2>
+                <div class="color-controls">
+                    <div class="color-group">
+                        <label for="qr-color">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7z"/><path d="M12 19v3"/><path d="M8 22h8"/><path d="m7 10 2 2 4-4"/></svg>
+                            QR Pattern
+                        </label>
+                        <input type="color" id="qr-color" value="#000000">
+                    </div>
+                    
+                    <div class="color-group">
+                        <label for="bg-color">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+                            Background
+                        </label>
+                        <input type="color" id="bg-color" value="#ffffff">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="img-box">
+                <img src="" id="qrimg" alt="QR Code">
+                <div class="placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 7h.01"/><path d="M7 17h.01"/><path d="M17 7h.01"/><path d="M17 17h.01"/></svg>
+                    <p>Your QR code will appear here</p>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M21 12H3"/></svg>
+                    Generate QR Code
+                </button>
+                <button id="download-btn" class="secondary" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download QR Code
+                </button>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        let text=document.getElementById('text-input');
-        let imgbox=document.querySelector('.img-box');
-        let qrimg=document.getElementById('qrimg');
-        let btn=document.getElementById('btn');
-        // function myfunc(){
-        //     if(text==""){
-        //         alert("Enter the text first");
-        //     }
-        //     else{
-        //         qrimg.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='+text.value;
-        //         imgbox.classList.add("show");
-        //     }
-        // }
-        btn.addEventListener("click",()=>{
-            if(text.value==""){
-                alert("Enter the text first");
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        
+        // Theme toggle functionality
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('light')) {
+                body.classList.replace('light', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.replace('dark', 'light');
+                localStorage.setItem('theme', 'light');
             }
-            else{
-                qrimg.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data='+text.value;
-                imgbox.classList.add("show");
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        body.classList.add(savedTheme);
+
+        // QR Code generation
+        let text = document.getElementById('text-input');
+        let imgbox = document.querySelector('.img-box');
+        let qrimg = document.getElementById('qrimg');
+        let btn = document.getElementById('btn');
+        let downloadBtn = document.getElementById('download-btn');
+        let placeholder = document.querySelector('.placeholder');
+
+        btn.addEventListener("click", () => {
+            let qrcolor = document.getElementById('qr-color').value.replace("#", ""); 
+            let qrbgcolor = document.getElementById('bg-color').value.replace("#", "");
+
+            if (text.value.trim() === "") {
+                text.classList.add('error');
+                setTimeout(() => text.classList.remove('error'), 1000);
+            } else {
+                btn.classList.add('loading');
+                qrimg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(text.value)}&color=${qrcolor}&bgcolor=${qrbgcolor}`;
+                
+                qrimg.onload = () => {
+                    imgbox.classList.add("show");
+                    placeholder.style.display = 'none';
+                    btn.classList.remove('loading');
+                    downloadBtn.disabled = false;
+                };
+            }
+        });
+
+        downloadBtn.addEventListener('click', async () => {
+            if (!qrimg.src) return;
+            
+            try {
+                downloadBtn.classList.add('loading');
+                
+                const response = await fetch(qrimg.src);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `qrcode-${Date.now()}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                downloadBtn.classList.remove('loading');
+            } catch (error) {
+                console.error('Download failed:', error);
+                downloadBtn.classList.remove('loading');
             }
         });
     </script>
